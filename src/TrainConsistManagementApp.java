@@ -1,28 +1,19 @@
+import java.util.Arrays;
+
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC16 - Bubble Sort Capacities");
+        System.out.println("UC17 - Sort Bogie Names");
         System.out.println("====================================\n");
 
-        int[] capacities = {72, 60, 50, 80, 65};
+        String[] bogies = {"Sleeper", "AC Chair", "First Class", "Cargo", "Guard"};
 
-        // Bubble Sort
-        for (int i = 0; i < capacities.length - 1; i++) {
-            for (int j = 0; j < capacities.length - i - 1; j++) {
-                if (capacities[j] > capacities[j + 1]) {
-                    // swap
-                    int temp = capacities[j];
-                    capacities[j] = capacities[j + 1];
-                    capacities[j + 1] = temp;
-                }
-            }
-        }
+        // Built-in sorting
+        Arrays.sort(bogies);
 
-        System.out.println("Sorted Capacities:");
-        for (int c : capacities) {
-            System.out.print(c + " ");
-        }
+        System.out.println("Sorted Bogie Names:");
+        System.out.println(Arrays.toString(bogies));
     }
 }
