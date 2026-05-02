@@ -5,23 +5,21 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC5 - Preserve Insertion Order");
+        System.out.println("UC6 - Map Bogie to Capacity");
         System.out.println("====================================\n");
 
-        // LinkedHashSet → maintains order + no duplicates
-        LinkedHashSet<String> train = new LinkedHashSet<>();
+        // HashMap → key-value mapping
+        HashMap<String, Integer> bogieMap = new HashMap<>();
 
-        // Add bogies
-        train.add("Engine");
-        train.add("Sleeper");
-        train.add("Cargo");
-        train.add("Guard");
+        // Insert values
+        bogieMap.put("Sleeper", 72);
+        bogieMap.put("AC Chair", 60);
+        bogieMap.put("First Class", 50);
 
-        // Duplicate (ignored)
-        train.add("Sleeper");
-
-        // Display
-        System.out.println("Train Formation:");
-        System.out.println(train);
+        // Iterate using entrySet
+        System.out.println("Bogie Capacity Details:");
+        for (Map.Entry<String, Integer> entry : bogieMap.entrySet()) {
+            System.out.println(entry.getKey() + " → " + entry.getValue());
+        }
     }
 }
