@@ -1,16 +1,11 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Bogie {
-    String type;
-    String cargo;
+    int capacity;
 
-    Bogie(String type, String cargo) {
-        this.type = type;
-        this.cargo = cargo;
-    }
-
-    public String toString() {
-        return type + "(" + cargo + ")";
+    Bogie(int capacity) {
+        this.capacity = capacity;
     }
 }
 
@@ -19,28 +14,41 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC12 - Safety Compliance Check");
+        System.out.println("UC13 - Performance Comparison");
         System.out.println("====================================\n");
 
         List<Bogie> bogies = new ArrayList<>();
 
-        bogies.add(new Bogie("Cylindrical", "Petroleum")); // valid
-        bogies.add(new Bogie("Open", "Coal"));             // valid
-        bogies.add(new Bogie("Box", "Grain"));             // valid
+        // Create dataset
+        for (int i = 0; i < 1000; i++) {
+            bogies.add(new Bogie((int)(Math.random() * 100)));
+        }
 
-        // ❌ Uncomment to test invalid
-        // bogies.add(new Bogie("Cylindrical", "Coal"));
+        // LOOP METHOD
+        long startLoop = System.nanoTime();
 
-        // allMatch validation
-        boolean isSafe = bogies.stream().allMatch(b -> {
-            if (b.type.equals("Cylindrical")) {
-                return b.cargo.equals("Petroleum");
+        List<Bogie> loopResult = new ArrayList<>();
+        for (Bogie b : bogies) {
+            if (b.capacity > 60) {
+                loopResult.add(b);
             }
-            return true;
-        });
+        }
 
-        System.out.println("Train Safety Status: " + (isSafe ? "SAFE" : "UNSAFE"));
+        long endLoop = System.nanoTime();
 
-        System.out.println("\nUC12 completed...");
+        // STREAM METHOD
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamResult = bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+
+        // OUTPUT
+        System.out.println("Loop Time: " + (endLoop - startLoop) + " ns");
+        System.out.println("Stream Time: " + (endStream - startStream) + " ns");
+
+        System.out.println("\nUC13 completed...");
     }
 }
