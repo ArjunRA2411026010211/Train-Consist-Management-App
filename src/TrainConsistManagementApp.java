@@ -1,35 +1,44 @@
-import java.util.*;
-import java.util.stream.*;
-
-class Bogie {
-    String name;
-    int capacity;
-
-    Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-    }
-}
+import java.util.Scanner;
+import java.util.regex.*;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC10 - Total Seating Capacity");
+        System.out.println("UC11 - Regex Validation");
         System.out.println("====================================\n");
 
-        List<Bogie> bogies = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 60));
-        bogies.add(new Bogie("First Class", 50));
+        System.out.print("Enter Train ID: ");
+        String trainId = sc.nextLine();
 
-        // REDUCE
-        int totalSeats = bogies.stream()
-                .map(b -> b.capacity)
-                .reduce(0, Integer::sum);
+        System.out.print("Enter Cargo Code: ");
+        String cargoCode = sc.nextLine();
 
-        System.out.println("Total Seats: " + totalSeats);
+        // REGEX PATTERNS
+        String trainRegex = "TRN-\\d{4}";
+        String cargoRegex = "PET-[A-Z]{2}";
+
+        Pattern trainPattern = Pattern.compile(trainRegex);
+        Pattern cargoPattern = Pattern.compile(cargoRegex);
+
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+
+        if (trainMatcher.matches()) {
+            System.out.println("\nTrain ID is VALID");
+        } else {
+            System.out.println("\nTrain ID is INVALID");
+        }
+
+        if (cargoMatcher.matches()) {
+            System.out.println("Cargo Code is VALID");
+        } else {
+            System.out.println("Cargo Code is INVALID");
+        }
+
+        System.out.println("\nUC11 completed...");
     }
 }
