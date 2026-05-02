@@ -5,28 +5,23 @@ public class TrainConsistManagementApp {
     public static void main(String[] args) {
 
         System.out.println("====================================");
-        System.out.println("UC4 - Maintain Ordered Bogie IDs");
+        System.out.println("UC5 - Preserve Insertion Order");
         System.out.println("====================================\n");
 
-        // LinkedList to maintain order
-        LinkedList<String> train = new LinkedList<>();
+        // LinkedHashSet → maintains order + no duplicates
+        LinkedHashSet<String> train = new LinkedHashSet<>();
 
         // Add bogies
         train.add("Engine");
         train.add("Sleeper");
-        train.add("AC");
         train.add("Cargo");
         train.add("Guard");
 
-        // Insert Pantry at position 2
-        train.add(2, "Pantry");
+        // Duplicate (ignored)
+        train.add("Sleeper");
 
-        // Remove first and last
-        train.removeFirst();
-        train.removeLast();
-
-        // Display final list
-        System.out.println("Final Train Consist:");
+        // Display
+        System.out.println("Train Formation:");
         System.out.println(train);
     }
 }
